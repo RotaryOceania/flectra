@@ -145,7 +145,7 @@ flectra.define("web_responsive", function (require) {
             var superMethod = this._super.apply(this, arguments);
             this.dropTemplateAvailable = false;
             let active_model = this.state.model;
-            if(this.enableFormDragDrop || active_model !== this.DragDropForm)
+            if(this.enableFormDragDrop)
             {
                 document.addEventListener('dragenter', this._onDragEnterForm.bind(this), true);
                 document.addEventListener('dragover', this._onDragOver.bind(this), true);
