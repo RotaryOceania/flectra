@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<flectra>
+	<template id="policy_sale_template_qweb">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+				<t t-foreach="docs" t-as="sp">
+					<div class="page">
+						<h3>
+							Policy Number
+							<b>
+								<span t-field="sp.policy_number" />
+							</b>
+						</h3>
+						<table clss="table table-condensed">
+							<table style="width:50%;float:left;">
+								<tr>
+									<td>
+										<strong>Policy Holder Name</strong>
+									</td>
+									<td>
+										<span t-field="sp.policy_holder" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Policy Scheme Name</strong>
+									</td>
+									<td>
+										<span t-field="sp.policy_schemes" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Branch</strong>
+									</td>
+									<td>
+										<span t-field="sp.branch_name" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Agent name</strong>
+									</td>
+									<td>
+										<span t-field="sp.agent_name" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Payment Term </strong>
+									</td>
+									<td>
+										<span t-field="sp.policy_term" />
+									</td>
+								</tr>
+							</table>
+
+							<table style="width:50%;float:right;">
+								<tr>
+									<td>
+										<strong>Policy Duration</strong>
+									</td>
+									<td>
+										<span t-field="sp.duration" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Policy Issu Date </strong>
+									</td>
+									<td>
+										<span t-field="sp.issu_date" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Policy End Date</strong>
+									</td>
+									<td>
+										<span t-field="sp.end_date" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Policy Amount</strong>
+									</td>
+									<td>
+										<span t-field="sp.policy_amount" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Premium Type</strong>
+									</td>
+									<td>
+										<span t-field="sp.emi" />
+									</td>
+								</tr>
+							</table>
+
+						</table>
+
+
+
+						<table>
+							<tr>
+								<td class="text-center">
+									<br />
+									<h3>EMI Details</h3>
+									<br />
+								</td>
+							</tr>
+						</table>
+						<t t-set="display_emi_no"
+							t-value="any([l.emi_no for l in sp.emi_line_ids])" />
+
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>EMI Number</th>
+									<th class="text-right">From Date</th>
+									<th class="text-right">End Date</th>
+									<th class="text-right">EMI Amount</th>
+									<!--<th class="text-right">Taxes</th> -->
+									<!--<th class="text-right">Price</th> -->
+								</tr>
+							</thead>
+
+
+							<tbody class="invoice_tbody">
+								<tr t-foreach="sp.emi_line_ids" t-as="l">
+									<td>
+										<span t-field="l.emi_no" />
+									</td>
+									<td class="hidden">
+										<span t-field="l.emi_no" />
+									</td>
+									<td class="text-right">
+										<span t-field="l.emi_start_date" />
+										<span t-field="l.emi_start_date"
+											groups="product.group_uom" />
+									</td>
+									<td class="text-right">
+										<span t-field="l.emi_end_date" />
+									</td>
+
+									<td class="text-right">
+										<span t-field="l.emi_amount" />
+									</td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+
+</flectra>
+
+
+
+

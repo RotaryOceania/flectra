@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+	<!--Policy Detail Create -->
+	<record id="view_purchase_order_form_inherit" model="ir.ui.view">
+        	<field name="name">Purchase Order Custom</field>
+        	<field name="model">purchase.order</field>
+        	<field name="inherit_id" ref="purchase.purchase_order_form"/>
+        	<field name="arch" type="xml">
+            	<field name="date_order" position="after">
+                		<field name="supplier1"/>
+                		<field name="umrn"/>
+            	</field>
+        	</field>
+	</record>
+	<record id="policy_tree_view" model="ir.ui.view">
+		<field name="name">policy.detail.tree</field>
+		<field name="model">policy.details</field>
+		<field name="arch" type="xml">
+			<tree string="Policy Details">
+				<field name="name" />
+				<field name="policy_code" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="policy_form_view" model="ir.ui.view">
+		<field name="name">Policy Form View</field>
+		<field name="model">policy.details</field>
+		<field name="arch" type="xml">
+			<form string="Policy Form View">
+				<sheet>
+					<group>
+						<group>
+							<field name="name" />
+						</group>
+
+						<group>
+							<field name="policy_code" required="1" />
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"
+						groups="base.group_user" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="policy_detail_action" model="ir.actions.act_window">
+		<field name="name">Policy Type Details</field>
+		<field name="res_model">policy.details</field>
+<!--		<field name="view_type">form</field>-->
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="policy_details" name="Policy Type"
+		parent="configuration_menu" action="policy_detail_action" />
+
+	<record id="schemes_detail_view" model="ir.ui.view">
+		<field name="name">schemes_detail Tree View</field>
+		<field name="model">schemes.details</field>
+		<field name="arch" type="xml">
+			<tree string="schemes detail Tree View">
+				<field name="product_name" />
+				<field name="name" />
+				<field name="policy_type" />
+				<field name="schemes_code" />
+				<field name="min_duration" />
+				<field name="max_duration" />
+				<field name="min_amount" />
+				<field name="max_amount" />
+				<field name="tax" />
+				<field name="intrest_rate" />
+				<field name="supplier" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="schemes_form_view" model="ir.ui.view">
+		<field name="name">Schemes Form View</field>
+		<field name="model">schemes.details</field>
+		<field name="arch" type="xml">
+			<form string="Schemes Form View">
+				<sheet>
+					<h1>
+						<field name="name" placeholder="Enter Scheme Name" />
+					</h1>
+					<group>
+						<group>
+							<field name="product_name"
+								domain="['|',('type','=','service'),('type','=','consu')]" />
+							<field name="policy_type" />
+							<field name="schemes_code" />
+							<field name="min_duration" required="1"/>
+							<field name="max_duration" required="1" />
+							<!-- <field name="supplier" /> -->
+							<field name="supplier1" />
+						</group>
+						<group>
+							<field name="min_amount" />
+							<field name="max_amount" />
+							<field name="tax" />
+							<field name="intrest_rate" />
+							<field name="unique_market_reference_number" />
+							<field name="sq_id" />
+
+						</group>
+					</group>
+					<field name="agents" domain="[('is_agent','=',True)]"
+						options="{'no_create' : True}" />
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"
+						groups="base.group_user" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="schemes_detail_action" model="ir.actions.act_window">
+		<field name="name">Schemes Detail</field>
+		<field name="res_model">schemes.details</field>
+<!--		<field name="view_type">form</field>-->
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="schemes_detail" name="Schemes Form"
+		parent="configuration_menu" action="schemes_detail_action" />
+
+</flectra>
+
+

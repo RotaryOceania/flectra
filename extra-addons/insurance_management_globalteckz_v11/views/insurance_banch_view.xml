@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+	<record id="insurance_tree_view" model="ir.ui.view">
+		<field name="name">Branch.tree</field>
+		<field name="model">res.company</field>
+		<field name="arch" type="xml">
+			<tree string="Branch Detail">
+				<field name="name" />
+				<field name="branch_code" />
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="insurance_form_view" model="ir.ui.view">
+		<field name="name">res.company.form</field>
+		<field name="model">res.company</field>
+		<field name="arch" type="xml">
+			<form string="Company">
+				<sheet>
+					<field name="logo" widget="image" class="oe_avatar" />
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" />
+						<h1>
+							<field name="name" />
+						</h1>
+						<group col="4">
+							<field name="branch_code" required="1"/>
+							<field name="parent_id" />
+							<field name="sq_id" />
+						</group>
+					</div>
+					<notebook colspan="4">
+						<page string="General Information">
+							<group>
+								<group>
+									<field name="partner_id" readonly="1" required="0"
+										groups="base.group_no_one" />
+									<label for="street" string="Address" />
+									<div class="o_address_format">
+										<field name="street" placeholder="Street..."
+											class="o_address_street" />
+										<field name="street2" placeholder="Street 2..."
+											class="o_address_street" />
+										<field name="city" placeholder="City"
+											class="o_address_city" />
+										<field name="state_id" class="o_address_state"
+											placeholder="State" options='{"no_open": True}' />
+										<field name="zip" placeholder="ZIP"
+											class="o_address_zip" />
+										<field name="country_id" placeholder="Country"
+											class="o_address_country" options='{"no_open": True}' />
+									</div>
+									<field name="report_header"
+										placeholder="e.g. Global Business Solutions" />
+								</group>
+								<group>
+									<field name="website" widget="url"
+										placeholder="e.g. www.flectra.com" />
+									<field name="phone" />
+									<field name="email" />
+									<field name="vat" />
+									<field name="company_registry" />
+									<field name="currency_id"
+										options="{'no_create': True, 'no_open': True}"
+										id="company_currency" invisible="1" />
+									<field name="parent_id" groups="base.group_multi_company" />
+									<field name="sequence" invisible="1" />
+									<field name="report_footer"
+										placeholder="e.g. Your Bank Accounts, one per line" />
+								</group>
+								<group name="social_media" />
+							</group>
+						</page>
+						<page string="Configuration">
+							<group>
+								<group name="account_grp" string="Accounting">
+									<field name="currency_id"/>
+								</group>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="insurance_detail_action"
+		model="ir.actions.act_window">
+		<field name="name">Branch Detail</field>
+		<field name="res_model">res.company</field>
+<!--		<field name="view_type">form</field>-->
+		<field name="type">ir.actions.act_window</field>
+		<!--<field name="view_id" ref="insurance_tree_view"/> -->
+	</record>
+
+
+	<record model="ir.actions.act_window.view"
+		id="institute_detail2">
+		<field name="sequence" eval="1" />
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="insurance_tree_view" />
+		<field name="act_window_id" ref="insurance_detail_action" />
+	</record>
+
+	<record model="ir.actions.act_window.view" id="institute_detail">
+		<field name="sequence" eval="3" />
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="insurance_form_view" />
+		<field name="act_window_id" ref="insurance_detail_action" />
+	</record>
+
+	<menuitem id="menu_Main1" name="LIC System"/>
+	<menuitem id="menu_insurance_detail_2" name="Configuration" parent="menu_Main1"/>
+	<menuitem id="insurance_branch_id" name="Branch Registration"
+		parent="configuration_menu" action="insurance_detail_action" />
+
+</flectra>

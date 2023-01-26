@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_policy_details,access_policy_details,model_policy_details,base.group_user,1,1,1,1
+access_schemes_details,access_schemes_details,model_schemes_details,base.group_user,1,1,1,1
+access_supplier_sale_policy,access_supplier_sale_policy,model_supplier_sale_policy,base.group_user,1,1,1,1
+access_sale_policy,access_sale_policy,model_sale_policy,base.group_user,1,1,1,1
+access_policy_emi_line,access_policy_emi_line,model_policy_emi_line,base.group_user,1,1,1,1
+

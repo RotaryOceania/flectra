@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+
+	<record id="sale_policy_wf" model="workflow">
+		<field name="name">sale.policy.workflow</field>
+		<field name="osv">sale.policy</field>
+		<field name="on_create">True</field>
+	</record>
+
+
+	<record id="sp_new" model="workflow.activity">
+		<field name="wkf_id" ref="sale_policy_wf" />
+		<field name="flow_start">True</field>
+		<field name="name">new</field>
+	</record>
+
+	<record id="sp_confirmed" model="workflow.activity">
+		<field name="wkf_id" ref="sale_policy_wf" />
+		<field name="name">confirm</field>
+		<field name="action">write({'state':'confirm'})</field>
+		<field name="kind">function</field>
+	</record>
+
+	<record id="sp_cancel" model="workflow.activity">
+		<field name="wkf_id" ref="sale_policy_wf" />
+		<field name="name">cancel</field>
+		<field name="action">write({'state':'cancel'})</field>
+		<field name="kind">function</field>
+	</record>
+
+	<record id="sp_done" model="workflow.activity">
+		<field name="wkf_id" ref="sale_policy_wf" />
+		<field name="name">done</field>
+		<field name="action">write({'state':'done'})
+			create_emi_line()
+			create_policy_number()
+		</field>
+		<field name="kind">function</field>
+	</record>
+
+	<!--new state -->
+	<record id="sp_1" model="workflow.transition">
+		<field name="act_from" ref="sp_new" />
+		<field name="act_to" ref="sp_confirmed" />
+		<field name="signal">btn_confirmed</field>
+	</record>
+
+	<record id="sp_2" model="workflow.transition">
+		<field name="act_from" ref="sp_new" />
+		<field name="act_to" ref="sp_cancel" />
+		<field name="signal">btn_cancel</field>
+	</record>
+
+	<!--confirmed state -->
+
+	<record id="sp_3" model="workflow.transition">
+		<field name="act_from" ref="sp_confirmed" />
+		<field name="act_to" ref="sp_cancel" />
+		<field name="signal">btn_cancel</field>
+	</record>
+
+	<record id="sp_4" model="workflow.transition">
+		<field name="act_from" ref="sp_confirmed" />
+		<field name="act_to" ref="sp_done" />
+		<field name="signal">btn_done</field>
+	</record>
+
+</flectra>
+
+
+
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+	<record id="service_product_product01" model="product.product">
+		<field name="name">Insurance Policy</field>
+		<field name="type">service</field>
+		<field name="categ_id" model="product.category" search="[('name', 'like', 'All')]" />
+		<field name="uom_id" model="product.uom" search="[('name', 'like', 'Unit(s)')]" />
+		<field name="sale_ok">True</field>
+		<field name="tracking">none</field>
+		<field name="list_price">1</field>
+	</record>
+</flectra>

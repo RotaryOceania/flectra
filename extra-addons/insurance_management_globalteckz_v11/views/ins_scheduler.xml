@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+
+	<record forcecreate="True" id="policy_invoice_scheduler_action" model="ir.cron">
+		<field name="name">Policy Invoice scheduler</field>
+		<field name="model_id" ref="model_policy_emi_line" />
+		<field name="state">code</field>
+		<field name="code">model.policy_invoice_scheduler()</field>
+		<field name="interval_number">1</field>
+		<field name="interval_type">days</field>
+		<field name="numbercall">-1</field>
+		<field name="doall" eval="False"/>
+	</record>
+</flectra>

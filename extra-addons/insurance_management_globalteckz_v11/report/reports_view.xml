@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<flectra>
+	<report id="policy_sale_reports" string="Policy Report"
+		model="sale.policy" report_type="qweb-pdf"
+		name="insurance_management_globalteckz_v11.policy_sale_template_qweb"
+		file="insurance_management_globalteckz_v11.policy_sale_template" />
+	<!--name="old_insurance_management.policy_sale_template_qweb" -->
+	<!--file="old_insurance_management.policy_sale_template" -->
+</flectra>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_subscription_subscription,access.subscription.subscription,model_subscription_subscription,,1,1,1,1
+access_subscription_history,access.subscription.history,model_subscription_history,,1,1,1,1
+access_subscription_document,access.subscription.document,model_subscription_document,,1,1,1,1
+access_subscription_document_fields,access.subscription.document.fields,model_subscription_document_fields,,1,1,1,1
+
+
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+
+    <!-- <record id="policy_menu_hidden" model="res.groups">
+        <field name="name">Policy Menu hidden</field>
+    </record>-->
+
+    <record id="policy_user" model="res.groups">
+        <field name="name">Policy User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="base.module_category_usability"/>
+         <!--<field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+    </record>
+    <record id="policy_agent_user" model="res.groups">
+        <field name="name">Policy Agent User</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+         <!--<field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+        <field name="implied_ids" eval="[(4, ref('policy_user'))]"/>
+    </record>
+
+    <record id="policy_manager_user" model="res.groups">
+        <field name="name">Policy Manager User</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+        <!--<field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+        <field name="implied_ids" eval="[(4, ref('policy_agent_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+
+</flectra>
+
+
+

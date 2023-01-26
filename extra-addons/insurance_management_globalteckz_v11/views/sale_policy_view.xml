@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<flectra>
+
+    <record id="sale_policy_tree_viewss" model="ir.ui.view">
+        <field name="name">Sale Policy Tree</field>
+        <field name="model">sale.policy</field>
+        <field name="arch" type="xml">
+            <tree string="Policy Details">
+                <field name="policy_schemes"/>
+                <field name="policy_holder"/>
+                <field name="policy_number"/>
+                <field name="branch_name"/>
+                <field name="agent_name"/>
+                <field name="duration"/>
+                <field name="issu_date"/>
+                <field name="end_date"/>
+                <field name="policy_amount"/>
+                <field name="emi"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="sale_policy_form_viewss" model="ir.ui.view">
+        <field name="name">Sale Policy Form View</field>
+        <field name="model">sale.policy</field>
+        <field name="arch" type="xml">
+            <form string="sale Policy Form View">
+                <header>
+                    <button name="send_mail_by_wizard" string="Send Email"
+                            class="oe_highlight" states="quotation,confirm,done" type="object"/>
+                    <button string="Confirm" name="confirm_btn" type="object"
+                            class="oe_highlight" states="new"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            class="oe_highlight" states="new,confirm"/>
+                    <button name="create_emi_line" string="Done" type="object"
+                            class="oe_highlight" states="confirm"/>
+                    <button name="view_policy_invoice"
+                            string="View All Invoices" class="oe_highlight" type="object"
+                            states="done"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="cancel,new,confirm,done"
+                           statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="policy_number"/>
+                    </h1>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- <button name="get_purchase_orders_count" string="Purchase Order" type="object" class="oe_stat_button" icon="fa-insurance"/> -->
+                        <button class="oe_stat_button" name="action_get_purchase_orders" type="object" icon="fa-pencil">
+                            <field string="Purchase Order" name="count_po_orders" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <!--<field name="policy_holder" context="{'search_default_customer':1,
+                                'show_address': 1}"/> -->
+                            <field name="policy_holder"
+                                   options="{&quot;always_reload&quot;: True}"/>
+                            <!--							<field name="policy_holder"-->
+                            <!--								context="{'search_default_customer':1, 'show_address': 1}"-->
+                            <!--								options="{&quot;always_reload&quot;: True}" />-->
+                            <field name="policy_term" string='Payment Term'/>
+                            <field name="policy_schemes"/>
+                            <field name="branch_name"/>
+                            <!--<field name="agent_name" domain="[('is_agent','=',True),('branch_name','=',branch_name)]"/> -->
+<!--                            <field name="agent_name" domain="[('is_agent','=',True)]"/>-->
+                            <field name="agent_name" domain="[('is_agent','=',True)]"/>
+                            <!-- <field name='supplier' /> -->
+                            <field name="supplier1"/>
+                            <field name="umrn"/>
+                        </group>
+
+                        <group>
+                            <!-- <field name="types"/> -->
+                            <field name="duration"/>
+                            <field name="issu_date"/>
+                            <field name="end_date"/>
+                            <field name="policy_amount" widget="Integer"/>
+                            <field name="emi" string='Premium Payment Terms Type'/>
+
+                        </group>
+                        <group>
+                            <field name="limit" widget="Integer"/>
+                            <field name="travel_days" widget="Integer"/>
+                            <field name="travel_days_consumed" widget="Integer"/>
+                            <field name="territory"/>
+                        </group>
+                        <group>
+                            <field name="excess" widget="Integer"/>
+                            <field name="endorsements"/>
+                            <field name="policy_wording"/>
+                            <field name="note" placeholder='Add Note......'/>
+                        </group>
+                    </group>
+                    <lable>
+                        <h3>EMI Details</h3>
+                    </lable>
+                    <field name="emi_line_ids" readonly="1">
+                        <tree>
+                            <field name="emi_no"/>
+                            <field name="emi_start_date"/>
+                            <field name="emi_end_date"/>
+                            <field name="emi_amount"/>
+                            <field name="invoice_id" invisible="1"/>
+                            <field name="invoice_id_state" invisible="1"/>
+                            <!--<button name="emi_invoice" string="Create Invoice" type="object"
+                                icon="STOCK_EDIT" attrs="{'invisible': [('invoice_id', '!=', False)]}" /> -->
+                            <button name="emi_invoice" string="Create Invoice"
+                                    type="object" icon="fa fa-pencil-square fa-2x"
+                                    attrs="{'invisible': [('invoice_id', '!=', False)]}"/>
+                            <!--<button name="view_invoice" string="View Invoice" type="object"
+                                icon="STOCK_DND" attrs="{'invisible': [('invoice_id', '==', False)]}" /> -->
+
+                            <!--<button name="view_invoice" string="Open" type="object" icon="gtk-no"
+                                class="oe_edit_only oe_link" attrs="{'invisible': [('invoice_id_state','!=','open')]}"
+                                /> -->
+                            <button name="view_invoice" string="Open" type="object"
+                                    icon="fa-file fa-2x"
+                                    attrs="{'invisible': [('invoice_id_state','!=','open')]}"/>
+                            <button name="view_invoice" string="Paid" type="object"
+                                    icon="fa-file-text fa-2x"
+                                    attrs="{'invisible': [('invoice_id_state','!=','paid')]}"/>
+                            <!--<button name="view_invoice" string="Paid" type="object" icon="kanban-apply"
+                                class="oe_edit_only oe_link" attrs="{'invisible': [('invoice_id_state','!=','paid')]}"
+                                /> -->
+
+                        </tree>
+                    </field>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_policy_action" model="ir.actions.act_window">
+        <field name="name">Policy Sale</field>
+        <field name="res_model">sale.policy</field>
+        <!--		<field name="view_type">form</field>-->
+        <field name="view_mode">search,tree,form</field>
+    </record>
+
+    <menuitem id='sale_policy' name='Policy Registration'
+              groups="policy_user" parent='policy_menu' action="sale_policy_action"/>
+
+</flectra>
+
+

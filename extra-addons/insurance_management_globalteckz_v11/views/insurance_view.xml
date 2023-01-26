@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<flectra>
+	<menuitem id='insurance_menu' name='Insurance Management' groups="policy_user" />
+	<menuitem id='policy_menu' name='Policy' parent='insurance_menu' sequence="1" groups="policy_user" />
+	<menuitem id='agent_menu' name='Agent Details' parent='insurance_menu' sequence="2" />
+	<menuitem id='configuration_menu' name='Configuration' parent='insurance_menu' sequence="3" />
+</flectra>
